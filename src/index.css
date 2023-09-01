@@ -1,13 +1,16 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* It defines custom fonts "Poppins" and "Lora" using the @font-face rule, making them available to use in the project.  */
+@layer base {
+  @font-face {
+    font-family: "Poppins";
+    src: url(../public/fonts/Poppins-Regular.ttf);
+  }
+
+  @font-face {
+    font-family: "Lora";
+    src: url(../public/fonts/Lora-Italic.ttf);
+  }
 }
