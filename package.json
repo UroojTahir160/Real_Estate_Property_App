@@ -15,11 +15,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start:json-server": "json-server --watch db.json --port 3333",
-    "start:react-app": "react-scripts start",
+    "start:json-server": "json-server --watch src/data/db.json --port 3333",
+    "start:react-app": "react-app-rewired start",
     "start": "concurrently \"npm run start:json-server\" \"npm run start:react-app\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -41,7 +41,14 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.8",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
     "concurrently": "^8.2.1",
-    "tailwindcss": "^3.3.3"
+    "customize-cra": "^1.0.0",
+    "react-app-rewired": "^2.2.1",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.2.2"
   }
 }

@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home } from "./pages/Home/Home";
-import { Navbar } from "./layout/Navbar/Navbar";
 import { useState, useEffect } from "react";
-import { PropertyDetails } from "./pages/PropertyDetails/PropertyDetails";
+import { Navbar } from "./layout";
+import { Home, PropertyDetails } from "./pages";
+import { Property } from "./types";
 
 function App() {
-  const [propertyList, setPropertyList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [propertyList, setPropertyList] = useState<Property[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}/realEstateListing`)
@@ -31,15 +31,7 @@ function App() {
             path="/"
             element={<Home propertyList={propertyList} isLoading={isLoading} />}
           />
-          <Route
-            path="/property-details/:pid"
-            element={
-              <PropertyDetails
-                propertyList={propertyList}
-                isLoading={isLoading}
-              />
-            }
-          />
+          <Route path="/property-details/:pid" element={<PropertyDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

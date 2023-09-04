@@ -1,6 +1,7 @@
+import { DataViewProps } from "@types";
 import { useNavigate } from "react-router-dom";
 
-export const DataCards = ({ paginatedData }) => {
+export const DataCards: React.FC<DataViewProps> = ({ paginatedData }) => {
   const navigate = useNavigate();
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

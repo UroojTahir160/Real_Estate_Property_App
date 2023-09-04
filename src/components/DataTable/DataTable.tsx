@@ -1,6 +1,8 @@
+import { DataViewProps } from "@types";
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-export const DataTable = ({ paginatedData }) => {
+
+export const DataTable: React.FC<DataViewProps> = ({ paginatedData }) => {
   const [sortColumn, setSortColumn] = useState("");
   const [sortDirection, setSortDirection] = useState("asc");
 
@@ -37,7 +39,7 @@ export const DataTable = ({ paginatedData }) => {
     ));
   };
 
-  const handleSort = (columnKey) => {
+  const handleSort = (columnKey: string) => {
     if (sortColumn === columnKey) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {

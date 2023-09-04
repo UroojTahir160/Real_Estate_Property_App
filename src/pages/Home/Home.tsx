@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import { ViewModes } from "../../components/ViewModes/ViewModes";
-import { DataCards } from "../../components/DataCards/DataCards";
-import { DataTable } from "../../components/DataTable/DataTable";
+import React, { useEffect, useState } from "react";
+import { DataCards, DataTable, ViewModes } from "@components";
+import { EViewMode, HomeProps, Property } from "@types";
 
-export const Home = ({ propertyList, isLoading }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("List");
-  const [paginatedData, setPaginatedData] = useState([]);
+export const Home: React.FC<HomeProps> = ({ propertyList, isLoading }) => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<EViewMode>(EViewMode.LIST);
+  const [paginatedData, setPaginatedData] = useState<Property[]>([]);
 
   /**Pagination to show 10 records on 1 Page */
   const itemsPerPage = 10;
@@ -15,7 +14,7 @@ export const Home = ({ propertyList, isLoading }) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  const totalPages = Math.ceil(propertyList?.length / itemsPerPage);
+  const totalPages = Math.ceil(propertyList.length / itemsPerPage);
 
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
