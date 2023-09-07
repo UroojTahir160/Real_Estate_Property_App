@@ -102,7 +102,7 @@ export const TableFilters: React.FC<ListingParamsProps> = ({
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
-        onClick={showClearFilterButton ? clearFilterHandler: toggleDropdown}
+        onClick={showClearFilterButton ? clearFilterHandler : toggleDropdown}
         type="button"
         className="inline-flex font-Poppins justify-center w-full rounded-md border shadow-sm px-3 py-[10px] bg-cyan-700 text-sm font-medium text-orange-100 hover:bg-cyan-600 transition-all delay-100 items-center"
       >
@@ -178,10 +178,7 @@ export const TableFilters: React.FC<ListingParamsProps> = ({
                 }
                 className="mt-1 block w-full rounded-md shadow-sm sm:text-sm p-2"
               >
-                <option
-                  key={propertyTypeOptions[0]}
-                  value={propertyTypeOptions[0]}
-                >
+                <option key="" value={""}>
                   All
                 </option>
                 {propertyTypeOptions.map((option) => (
