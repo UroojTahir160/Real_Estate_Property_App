@@ -1,54 +1,38 @@
+import { getPropertyDetailsById } from "@api";
+import {
+  BathtubIcon,
+  BedIcon,
+  BuildingIcon,
+  DimensionsIcon,
+  GarageIcon,
+  LocationIcon,
+  ShopIcon,
+} from "@assets";
+import { Property } from "@types";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { LuBedDouble } from "react-icons/lu";
-import { GrLocation } from "react-icons/gr";
-import { MdOutlineBathtub } from "react-icons/md";
-import { RxDimensions } from "react-icons/rx";
-import { BiBuildingHouse } from "react-icons/bi";
-import { MdOutlineGarage } from "react-icons/md";
-import { AiOutlineShop } from "react-icons/ai";
 
-export const PropertyDetails = () => {
-  const [propertyDetails, setPropertyDetails] = useState();
-  const [isLoading, setIsLoading] = useState("true");
+export const PropertyDetails: React.FC = () => {
+  const [propertyDetails, setPropertyDetails] = useState<Property | null>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { pid } = useParams();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BASE_URL}/realEstateListing/${pid}`)
-      .then(async (res) => {
-        const response = await res.json();
-        setTimeout(() => {
-          setPropertyDetails(response);
-          setIsLoading(false);
-        }, 1000);
-      })
-      .catch((error) => {
-        console.log(error);
-    });
-  }, []);
+    const fetchPropertyDetails = async (propertyId: string) => {
+      const propertyDetails = await getPropertyDetailsById(propertyId);
+      if (propertyDetails) {
+        setPropertyDetails(propertyDetails);
+        setIsLoading(false);
+      } else {
+        console.log("Property Details not found");
+        setIsLoading(false);
+      }
+    };
 
-  //   const featureItems = [
-  //     { title: "Bedrooms", icon: <LuBedDouble className="h-5 w-5" />, value: propertyDetails.beds },
-  //     { title: "Baths", icon: <MdOutlineBathtub className="h-5 w-5" />, value: propertyDetails.bath },
-  //     { title: "Square feet", icon: <RxDimensions className="h-5 w-5" />, value: propertyDetails.coveredAreaSQFT },
-  //     { title: "Type", icon: <BiBuildingHouse className="h-5 w-5" />, value: propertyDetails.propertyType },
-  //     { title: "Garage", icon: <GiHomeGarage className="h-5 w-5" />, value: propertyDetails.garage ? " Included" : " Excluded" },
-  //     { title: "Area", icon: <BsShop className="h-5 w-5" />, value: propertyDetails.isCommercial ? "Commercial" : "Non Commercial" },
-  //   ];
-
-  //   function featureItem(title, icon, value) {
-  //     return (
-  //       <div className="flex items-center flex-col">
-  //         <p className="font-Poppins font-semibold text-md flex items-center mb-2 text-cyan-700">
-  //           {icon}
-  //           {value}
-  //         </p>
-  //         <h3 className="font-semibold text-md flex items-center">
-  //           {title}
-  //         </h3>
-  //       </div>
-  //     );
-  //   }
+    if (pid) {
+      fetchPropertyDetails(pid);
+    }
+  }, [pid]);
 
   return (
     <div className="mx-auto px-10 lg:px-0 py-3 max-w-md md:max-w-3xl lg:max-w-4xl mt-8">
@@ -98,19 +82,19 @@ export const PropertyDetails = () => {
             Back to Home
           </Link>
           <img
-            src={propertyDetails.imageUrl}
-            alt={propertyDetails.title}
+            src={propertyDetails?.imageUrl}
+            alt={propertyDetails?.title}
             className="w-full h-96 object-cover rounded-t-lg"
           />
           <div className="py-6 gap-6 flex flex-col">
             <div>
               <h2 className="text-xl sm:text-2xl font-semibold mb-4 font-Lora">
-                {propertyDetails.title}
+                {propertyDetails?.title}
               </h2>
               <p className="text-gray-700 text-sm sm:text-md font-Poppins flex items-center">
-                <GrLocation className="text-cyan-700 mr-2 h-4 w-4 font-semibold" />
+                <LocationIcon className="text-cyan-700 mr-2 h-4 w-4 font-semibold" />
 
-                {propertyDetails.address}
+                {propertyDetails?.address}
               </p>
             </div>
             <div className="gap-4 flex flex-col">
@@ -118,8 +102,8 @@ export const PropertyDetails = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-gray-600 text-sm shadow-sm rounded-lg bg-orange-100 p-8 md:gap-8 items-center">
                 <div className="flex items-center flex-col">
                   <p className="font-Poppins font-semibold text-sm flex items-center mb-2 text-cyan-700">
-                    <LuBedDouble className="mr-2 h-5 w-5" />
-                    {propertyDetails.beds}
+                    <BedIcon className="mr-2 h-5 w-5" />
+                    {propertyDetails?.beds}
                   </p>
                   <h3 className="font-semibold text-md flex items-center">
                     Bedrooms
@@ -127,8 +111,8 @@ export const PropertyDetails = () => {
                 </div>
                 <div className="flex items-center flex-col">
                   <p className="font-Poppins font-semibold text-sm flex items-center mb-2 text-cyan-700">
-                    <MdOutlineBathtub className="mr-2 h-5 w-5" />
-                    {propertyDetails.bath}
+                    <BathtubIcon className="mr-2 h-5 w-5" />
+                    {propertyDetails?.bath}
                   </p>
                   <h3 className="font-semibold text-md flex items-center">
                     Baths
@@ -136,8 +120,8 @@ export const PropertyDetails = () => {
                 </div>
                 <div className="flex items-center flex-col">
                   <p className="font-Poppins font-semibold text-sm flex items-center mb-2 text-cyan-700">
-                    <RxDimensions className="mr-2 h-5 w-5" />
-                    {propertyDetails.coveredAreaSQFT}
+                    <DimensionsIcon className="mr-2 h-5 w-5" />
+                    {propertyDetails?.coveredAreaSQFT}
                   </p>
                   <h3 className="font-semibold text-md flex items-center">
                     Square feet
@@ -145,8 +129,8 @@ export const PropertyDetails = () => {
                 </div>
                 <div className="flex items-center flex-col">
                   <p className="font-Poppins font-semibold text-sm flex items-center mb-2 text-cyan-700">
-                    <BiBuildingHouse className="mr-2 h-5 w-5" />
-                    {propertyDetails.propertyType}
+                    <BuildingIcon className="mr-2 h-5 w-5" />
+                    {propertyDetails?.propertyType}
                   </p>
                   <h3 className="font-semibold text-md flex items-center">
                     Type
@@ -154,8 +138,8 @@ export const PropertyDetails = () => {
                 </div>
                 <div className="flex items-center flex-col">
                   <p className="font-Poppins font-semibold text-sm flex items-center mb-2 text-cyan-700">
-                    <MdOutlineGarage className="mr-2 h-5 w-5" />
-                    {propertyDetails.garage ? " Included" : " Excluded"}
+                    <GarageIcon className="mr-2 h-5 w-5" />
+                    {propertyDetails?.garage ? " Included" : " Excluded"}
                   </p>
                   <h3 className="font-semibold text-md flex items-center">
                     Garage
@@ -163,8 +147,8 @@ export const PropertyDetails = () => {
                 </div>
                 <div className="flex items-center flex-col">
                   <p className="font-Poppins font-semibold text-sm flex text-center items-center mb-2 text-cyan-700">
-                    <AiOutlineShop className="mr-2 h-5 w-5" />
-                    {propertyDetails.isCommercial ? "Yes" : "No"}
+                    <ShopIcon className="mr-2 h-5 w-5" />
+                    {propertyDetails?.isCommercial ? "Yes" : "No"}
                   </p>
                   <h3 className="font-semibold text-md flex items-center">
                     Commercial Area
@@ -175,7 +159,7 @@ export const PropertyDetails = () => {
             <div className="flex flex-col gap-4">
               <h2 className="text-xl font-semibold font-Lora">Description</h2>
               <p className="text-gray-700 text-justify">
-                {propertyDetails.description}
+                {propertyDetails?.description}
               </p>
             </div>
             <div className="flex flex-col gap-4">
@@ -185,7 +169,7 @@ export const PropertyDetails = () => {
                   Agent Name:
                 </h3>
                 <p className="text-gray-700 ml-5 text-sm">
-                  {propertyDetails.agentName}
+                  {propertyDetails?.agentName}
                 </p>
               </div>
               <div className="flex">
@@ -193,7 +177,7 @@ export const PropertyDetails = () => {
                   Agent Contact:
                 </h3>
                 <p className="text-gray-700 ml-5 text-sm">
-                  {propertyDetails.agentContact}
+                  {propertyDetails?.agentContact}
                 </p>
               </div>
             </div>
