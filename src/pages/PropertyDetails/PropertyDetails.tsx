@@ -1,51 +1,38 @@
-import { BathtubIcon, BedIcon, BuildingIcon, DimensionsIcon, GarageIcon, LocationIcon, ShopIcon } from "@assets";
+import { getPropertyDetailsById } from "@api";
+import {
+  BathtubIcon,
+  BedIcon,
+  BuildingIcon,
+  DimensionsIcon,
+  GarageIcon,
+  LocationIcon,
+  ShopIcon,
+} from "@assets";
 import { Property } from "@types";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export const PropertyDetails: React.FC = () => {
-  const [propertyDetails, setPropertyDetails] = useState<
-    Property | undefined
-  >();
+  const [propertyDetails, setPropertyDetails] = useState<Property | null>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { pid } = useParams();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BASE_URL}/realEstateListing/${pid}`)
-      .then(async (res) => {
-        const response = await res.json();
-        setTimeout(() => {
-          setPropertyDetails(response);
-          setIsLoading(false);
-        }, 1000);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const fetchPropertyDetails = async (propertyId: string) => {
+      const propertyDetails = await getPropertyDetailsById(propertyId);
+      if (propertyDetails) {
+        setPropertyDetails(propertyDetails);
+        setIsLoading(false);
+      } else {
+        console.log("Property Details not found");
+        setIsLoading(false);
+      }
+    };
+
+    if (pid) {
+      fetchPropertyDetails(pid);
+    }
   }, [pid]);
-
-  //   const featureItems = [
-  //     { title: "Bedrooms", icon: <LuBedDouble className="h-5 w-5" />, value: propertyDetails.beds },
-  //     { title: "Baths", icon: <MdOutlineBathtub className="h-5 w-5" />, value: propertyDetails.bath },
-  //     { title: "Square feet", icon: <RxDimensions className="h-5 w-5" />, value: propertyDetails.coveredAreaSQFT },
-  //     { title: "Type", icon: <BiBuildingHouse className="h-5 w-5" />, value: propertyDetails.propertyType },
-  //     { title: "Garage", icon: <GiHomeGarage className="h-5 w-5" />, value: propertyDetails.garage ? " Included" : " Excluded" },
-  //     { title: "Area", icon: <BsShop className="h-5 w-5" />, value: propertyDetails.isCommercial ? "Commercial" : "Non Commercial" },
-  //   ];
-
-  //   function featureItem(title, icon, value) {
-  //     return (
-  //       <div className="flex items-center flex-col">
-  //         <p className="font-Poppins font-semibold text-md flex items-center mb-2 text-cyan-700">
-  //           {icon}
-  //           {value}
-  //         </p>
-  //         <h3 className="font-semibold text-md flex items-center">
-  //           {title}
-  //         </h3>
-  //       </div>
-  //     );
-  //   }
 
   return (
     <div className="mx-auto px-10 lg:px-0 py-3 max-w-md md:max-w-3xl lg:max-w-4xl mt-8">

@@ -16,4 +16,3 @@ export type Property = {
     lotSizeACRES: number;
     yearBuilt: number;
   };
-  

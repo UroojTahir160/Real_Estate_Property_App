@@ -1,11 +1,12 @@
+import { emptySearch } from "@assets";
 import { DataViewProps } from "@types";
-import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const DataTable: React.FC<DataViewProps> = ({ paginatedData }) => {
-  const [sortColumn, setSortColumn] = useState("");
-  const [sortDirection, setSortDirection] = useState("asc");
-
+export const DataTable: React.FC<DataViewProps> = ({
+  paginatedData,
+  params,
+  setParams,
+}) => {
   const navigate = useNavigate();
 
   const tableHeaderTitles = [
@@ -29,8 +30,13 @@ export const DataTable: React.FC<DataViewProps> = ({ paginatedData }) => {
         {(colTitle.toLowerCase() === "beds" ||
           colTitle.toLowerCase() === "bath" ||
           colTitle.toLowerCase() === "price") && (
-          <span className="ml-1 text-xs">
-            {sortColumn === colTitle.toLowerCase() && sortDirection === "asc"
+          <span
+            className="ml-1 text-xs cursor-pointer"
+            title={
+              params._order === "asc" ? "Sort Descending" : "Sort Ascending"
+            }
+          >
+            {params._sort === colTitle.toLowerCase() && params._order === "asc"
               ? "▲"
               : "▼"}
           </span>
@@ -40,41 +46,24 @@ export const DataTable: React.FC<DataViewProps> = ({ paginatedData }) => {
   };
 
   const handleSort = (columnKey: string) => {
-    if (sortColumn === columnKey) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    if (params._sort === columnKey) {
+      setParams({
+        ...params,
+        _order: params._order === "asc" ? "desc" : "asc",
+      });
     } else {
-      setSortColumn(columnKey);
-      setSortDirection("asc");
+      setParams({ ...params, _sort: columnKey, _order: "asc" });
     }
   };
-
-  const sortedData = useMemo(() => {
-    if (sortColumn) {
-      const sortedList = [...paginatedData].sort((a, b) => {
-        if (
-          sortColumn === "beds" ||
-          sortColumn === "bath" ||
-          sortColumn === "price"
-        ) {
-          return sortDirection === "asc"
-            ? a[sortColumn] - b[sortColumn]
-            : b[sortColumn] - a[sortColumn];
-        }
-        return 0;
-      });
-      return sortedList;
-    } else {
-      return paginatedData;
-    }
-  }, [paginatedData, sortColumn, sortDirection]);
 
   return (
     <table className="max-w-full border divide-y divide-gray-200 bg-gray-100 shadow-md">
       <thead className="bg-orange-200">
         <tr>{getTableHeader()}</tr>
       </thead>
+
       <tbody className=" divide-y divide-gray-200 ">
-        {sortedData.map((listing, index) => (
+        {paginatedData?.map((listing, index) => (
           <tr key={index}>
             <td className="p-4 whitespace-nowrap font-Poppins text-left">
               {listing.title}

@@ -110,7 +110,8 @@
       "@types": ["src/types/index.ts"],
       "@pages": ["src/pages/index.ts"],
       "@layout": ["src/layout/index.ts"],
-      "@assets": ["src/assets/index.ts"]
+      "@assets": ["src/assets/index.ts"],
+      "@api": ["src/api/index.ts"]
     }
   }
 }

@@ -1,12 +1,12 @@
-import { DataViewProps } from "@types";
+import { DataCardsProps } from "@types";
 import { useNavigate } from "react-router-dom";
 
-export const DataCards: React.FC<DataViewProps> = ({ paginatedData }) => {
+export const DataCards: React.FC<DataCardsProps> = ({ paginatedData }) => {
   const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
       {paginatedData?.map((listing) => (
-        <div key={listing.id} className="bg-white shadow-md border p-4 rounded-md">
+        <div key={listing.id} className="shadow-md border p-4 rounded-md bg-gray-100">
           <img
             src={listing.imageUrl}
             alt={listing.title}
@@ -18,7 +18,7 @@ export const DataCards: React.FC<DataViewProps> = ({ paginatedData }) => {
             </h3>
             <h2 className="text-sm font-Poppins">{listing.address}</h2>
             <p className="text-cyan-700 font-medium font-Poppins">
-              ${listing.price}
+              PKR {listing.price}
             </p>
           </div>
           <button
