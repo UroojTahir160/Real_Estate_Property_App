@@ -9,7 +9,7 @@ const propertyTypeOptions = [
   "Bungalow",
   "Villa",
   "Cottage",
-  "PentHouse",
+  "Cabin",
 ];
 
 const MIN_PRICE = 0;
