@@ -33,10 +33,10 @@ To run the Real Estate Property App on your local machine, follow these simple s
 
 4. Open your terminal and navigate to the project folder.
 5. Install project dependencies by running:
-    npm install
+    - npm install
 
 6. Start the application with:
-    npm start
+    - npm start
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
