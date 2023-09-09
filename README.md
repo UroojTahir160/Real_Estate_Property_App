@@ -2,22 +2,49 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Real Estate Property App
+Welcome to the Real Estate Property App, a powerful tool for browsing and exploring a wide range of real estate listings. This application allows users to search, filter, sort, and paginate through a curated collection of properties, making it easy to find the perfect place to call home. 
 
-In the project directory, you can run:
+# Live Demo Link
+This app is deployed on Vercel. You can access this app using the link below:
+[RealEstate Property App](https://real-estate-property-app-brdl-1fa4j5dr3-uroojt113-gmailcom.vercel.app/)
 
-### `npm start`
+# Features
+Search: Quickly locate properties by entering keywords or specific details, such as addresses, property types, or agent names. 
+In this repo, Search functionality is performed using address/location.
+
+Filter: Narrow down your search results by applying filters like property type, number of bedrooms, bathrooms, and more. 
+In this repo, filters are applied to property type, Beds, Baths, and Price.
+
+Sort: Sort listings based on various criteria, such as price, date listed, or property size, to find the best match for your preferences.
+In this repo, sort is applied to beds, baths, and price.
+
+Pagination: Conveniently browse through multiple pages of listings, ensuring you don't miss any opportunities.
+
+# Getting Started
+To run the Real Estate Property App on your local machine, follow these simple steps:
+
+1. Clone this repository to your local system.
+2. Create a .env file in the root directory of the project.
+3. Add the following environment variables to your .env file:
+
+REACT_APP_BASE_URL=https://localhost:3333
+PORT=3000
+
+4. Open your terminal and navigate to the project folder.
+5. Install project dependencies by running:
+
+### npm install
+
+6. Start the application with:
+
+### npm start
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -27,44 +54,24 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Deployed JSON Server
+This application uses a deployed JSON Server hosted on Vercel to fetch real estate data. You can find the server code and configuration in the [realEstate_live_json_server](https://github.com/UroojTahir160/realEstate_live_json_server) repository. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Deployed Json server link
+[JSON_SERVER_DEPLOYED_LINK
+](https://real-estate-live-json-server.vercel.app/realEstateListing
+)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Contributing
+If you'd like to contribute to this project, please follow these guidelines:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Fork this repository.
+Create your feature branch (git checkout -b feature/YourFeature).
+Commit your changes (git commit -m 'Add some feature').
+Push to the branch (git push origin feature/YourFeature).
+Open a pull request.
 
-## Learn More
+We welcome contributions from the community to make this real estate app even better!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
